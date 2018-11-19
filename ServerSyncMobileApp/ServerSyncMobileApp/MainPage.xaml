@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ServerSyncMobileApp"
+             x:Class="ServerSyncMobileApp.MainPage">
+
+    <StackLayout>
+        <StackLayout  Orientation="Horizontal">
+            <Button Text="Add" Clicked="OnAdd"/>
+        </StackLayout>
+        <TableView Intent="Form">
+            <TableRoot>
+                <TableSection Title="Basic">
+                    <EntryCell x:Name="name" Label="Name" Placeholder="(eg Jon)"></EntryCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        <Label x:Name="lblMessage" />
+        <ListView x:Name="productListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>
