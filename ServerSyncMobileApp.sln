@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerSyncMobileApp.Android", "ServerSyncMobileApp\ServerSyncMobileApp.Android\ServerSyncMobileApp.Android.csproj", "{60471808-D8E6-4D9A-8E2E-243501FE39E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerSyncMobileApp", "ServerSyncMobileApp\ServerSyncMobileApp\ServerSyncMobileApp.csproj", "{4867E233-DFE5-4781-AB37-0F29F2B22B51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerSyncMobileApp", "ServerSyncMobileApp\ServerSyncMobileApp\ServerSyncMobileApp.csproj", "{4867E233-DFE5-4781-AB37-0F29F2B22B51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile App", "Mobile App", "{413FBBBC-710B-4AF9-ACD0-DDB91899D5B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{60471808-D8E6-4D9A-8E2E-243501FE39E2} = {413FBBBC-710B-4AF9-ACD0-DDB91899D5B4}
+		{4867E233-DFE5-4781-AB37-0F29F2B22B51} = {413FBBBC-710B-4AF9-ACD0-DDB91899D5B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECF1566B-813F-4AA0-AAF8-67BEFEC93F9B}
