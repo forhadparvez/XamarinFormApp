@@ -83,18 +83,30 @@ namespace ServerSyncMobileApp
                 await _client.PostAsync(Url, stringContent);
 
                 // delete SqLite
-                await _connection.DeleteAsync(product);
+                await _connection.DeleteAsync(product.Id);
             }
         }
 
-        protected override void OnSleep()
+        protected override async void OnSleep()
         {
             // Handle when your app sleeps
         }
 
-        protected override void OnResume()
+        protected override async void OnResume()
         {
             // Handle when your app resumes
+            try
+            {
+                var isConnected = CrossConnectivity.Current.IsConnected;
+                if (isConnected)
+                {
+                    await SqLiteToServerSync();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }
