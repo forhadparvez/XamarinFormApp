@@ -69,7 +69,11 @@ namespace ServerSyncMobileApp
                     var context = JsonConvert.SerializeObject(dto, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
                     var stringContent = new StringContent(context, Encoding.UTF8, "application/json");
                     await _client.PostAsync(Url, stringContent);
-                    //productListView.ItemsSource = _posts;
+
+                    var context2 = await _client.GetStringAsync(Url);
+                    var posts = JsonConvert.DeserializeObject<List<Product>>(context2);
+                    _posts = new ObservableCollection<Product>(posts);
+                    productListView.ItemsSource = _posts;
                 }
                 catch (Exception ex)
                 {
@@ -82,8 +86,10 @@ namespace ServerSyncMobileApp
                 var product = new Product() { Name = name.Text };
                 await _connection.InsertAsync(product);
                 _products.Add(product);
-                //productListView.ItemsSource = _products;
+                productListView.ItemsSource = _products;
             }
+
+            name.Text = "";
         }
     }
 

@@ -83,7 +83,7 @@ namespace ServerSyncMobileApp
                 await _client.PostAsync(Url, stringContent);
 
                 // delete SqLite
-                await _connection.DeleteAsync(product.Id);
+                await _connection.DeleteAsync<Product>(product.Id);
             }
         }
 
