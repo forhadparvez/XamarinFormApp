@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Plugin.Connectivity;
 using ServerSyncMobileApp.Persistence;
 using SQLite;
 using Xamarin.Forms;
@@ -57,24 +58,31 @@ namespace ServerSyncMobileApp
 
         private async void OnAdd(object sender, EventArgs e)
         {
-            // sqlite
-            var product = new Product(){Name = name.Text};
-            await _connection.InsertAsync(product);
-            _products.Add(product);
-            //productListView.ItemsSource = _products;
-
-            try
+            
+            var isConnected = CrossConnectivity.Current.IsConnected;
+            if (isConnected)
             {
-                // api
-                var dto = new ProductDto() {Id = 0, Name = name.Text};
-                var context = JsonConvert.SerializeObject(dto, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
-                var stringContent = new StringContent(context, Encoding.UTF8, "application/json");
-                await _client.PostAsync(Url, stringContent);
-                //productListView.ItemsSource = _posts;
+                try
+                {
+                    // api
+                    var dto = new ProductDto() { Id = 0, Name = name.Text };
+                    var context = JsonConvert.SerializeObject(dto, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+                    var stringContent = new StringContent(context, Encoding.UTF8, "application/json");
+                    await _client.PostAsync(Url, stringContent);
+                    //productListView.ItemsSource = _posts;
+                }
+                catch (Exception ex)
+                {
+                    lblMessage.Text = "Server Error Save Fail";
+                }
             }
-            catch (Exception ex)
+            else
             {
-                lblMessage.Text = "Server Error Save Fail";
+                // sqlite
+                var product = new Product() { Name = name.Text };
+                await _connection.InsertAsync(product);
+                _products.Add(product);
+                //productListView.ItemsSource = _products;
             }
         }
     }
